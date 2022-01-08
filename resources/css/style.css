@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #777;
+}
+
+.navbar {
+  opacity: 0.9;
+}
+#main-header {
+  margin-top: 100px;
+  font-family: "Prompt", sans-serif;
+}
+.exit {
+  padding: 5px 7px;
+}
+.main-page {
+  background-image: linear-gradient(
+      to right bottom,
+      rgb(20, 20, 20),
+      rgba(15, 19, 17, 0.6)
+    ),
+    url("../img/people.jpg");
+  background-size: cover;
+  background-position: top;
+  height: 100vh;
+}
+.slogan {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+}
+.tryit {
+  height: 30rem;
+  border-radius: 30px;
+}
+.nav-link-cus {
+  position: relative;
+  padding: 0 10px;
+}
+.nav-link-cus:after {
+  content: "";
+  position: absolute;
+  background-color: #ff3c78;
+  height: 3px;
+  width: 0;
+  left: 0;
+  bottom: -10px;
+  transition: 0.3s;
+}
+.nav-link-cus:hover {
+  color: #fff !important;
+}
+.nav-link-cus:hover:after {
+  width: 100%;
+}
