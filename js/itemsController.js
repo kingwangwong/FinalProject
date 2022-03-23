@@ -14,7 +14,7 @@ export class ItemsController {
             createdAt: createdAt
         };
         this.itemsArray.push(item);
-        
+        localStorage.setItem("items", JSON.stringify(this.items));
 
 
     }
