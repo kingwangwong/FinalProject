@@ -1,9 +1,14 @@
 export class ItemsController {
-    constructor(currentId = 0){
-        itemsArray = [];
-        this.currentId = currentId;
-        
+//    constructor(currentId = 0){
+//        itemsArray = [];
+//        this.currentId = currentId;
+//
+//    }
+    constructor() {
+        this.items = [];
     }
+
+
     addItem(name, text, img, author, createdAt) {
         const item = {
             id: this.currentId++,
@@ -14,6 +19,7 @@ export class ItemsController {
             createdAt: createdAt
         };
         this.itemsArray.push(item);
+
         localStorage.setItem("items", JSON.stringify(this.items));
 
 
@@ -29,5 +35,38 @@ export class ItemsController {
             }
         }
     }
+
+    save({name, description, imageUrl}){
+                const data = { name,  description, imageUrl };
+
+                fetch('http://localhost:8080/item', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                console.log('Success:', data);
+                })
+                .catch((error) => {
+                console.error('Error:', error);
+                });
+            }
+
+            delete(itemId){
+                    fetch(`http://localhost:8080/item/${itemId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-type': 'application/json'
+                        }
+                    })
+                    .then(response => console.log("Success:", response))
+                    .catch((error) => {
+                        console.error("Error:", error);
+                    })
+
+                }
 }
 
