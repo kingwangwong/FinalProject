@@ -42,6 +42,49 @@ function loadCardsListFromItemsController() {
     }
 }
 
+ function loadItemsFromDatabase() {
+ fetch('http://localhost:8080/item/all')
+ .then(response => response.json())
+ .then(data => {
+     for(let i = 0; i < data.length; i++) {
+         itemsController.items.push(data[i]);
+     }
+ })
+ .then(() => {
+     loadCardsListFromItemsController();
+ })
+ .catch((error) => {
+     console.log('Error: ', error);
+ })
+
+
+  function addItemCard(item){
+    const itemHTML = '<div id="'+item.id +'" class="card" style="width: 20rem;">\n' +
+        '    <img src="'+item.imageUrl +'" width="300" height="250"  alt="product image">\n' +
+        '    <div class="card-body">\n' +
+        '        <h5 class="card-title">'+item.name+'</h5>\n' +
+        '        <p class="card-text">'+item.description+'</p>\n' +
+        '        <a href="#" class="btn btn-primary">Add</a>\n' +
+        '        <a href="./item_update_form" class="btn btn-primary">Update</a>\n' +
+        '        <a href="#" class="btn btn-danger btn-delete">Delete</a>\n' +
+        '    </div>\n' +
+        '</div>\n' +
+        '<br/>';
+    const itemsContainer = document.getElementById("list-items");
+    itemsContainer.innerHTML += itemHTML;
+
+    let deleteButton = document.getElementsByClassName("btn-delete");
+    for(let i = 0; i < deleteButton.length; i++) {
+        let deleteBtn = deleteButton[i];
+        deleteBtn.addEventListener("click", () => {
+            let item = deleteBtn.parentElement.parentElement;
+            itemsController.delete(item.id);
+            location.reload();
+        })
+    }
+}
+
 loadStorageSampleData();
 itemsController.loadItemsFromLocalStorage();
 loadCardsListFromItemsController();
+loadItemsFromDatabase();
